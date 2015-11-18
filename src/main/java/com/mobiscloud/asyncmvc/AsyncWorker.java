@@ -21,12 +21,12 @@ public class AsyncWorker {
         if (_servletThreadPool == null) {
             ThreadFactory namedThreadFactory;
             namedThreadFactory = new ThreadFactoryBuilder()
-                    .setNameFormat("asyncmvc-servlet-pool-%d")
+                    .setNameFormat("asyncworker-servlet-pool-%d")
                     .build();
 
             _actionThreadPool = Executors.newSingleThreadExecutor(namedThreadFactory);
             namedThreadFactory = new ThreadFactoryBuilder()
-                    .setNameFormat("asyncmvc-action-pool-%d")
+                    .setNameFormat("asyncworker-action-pool-%d")
                     .build();
             _servletThreadPool = Executors.newFixedThreadPool(5, namedThreadFactory); // newCachedThreadPool
             assert (_servletThreadPool != null);
@@ -35,19 +35,19 @@ public class AsyncWorker {
         };
     }
 
-    public void invokeServlet(final Runnable f) throws Throwable {
-        invoke(_servletThreadPool, f);
+    public void invokeServlet(Method m){
+        invoke(_servletThreadPool, m);
     }
 
-    public void invokeAction(final Runnable f) throws Throwable {
-        invoke(_actionThreadPool, f);
+    public void invokeAction(final Method m){
+        invoke(_actionThreadPool, m);
     }
-    public void invoke(ExecutorService threadPool, final Runnable f) throws Throwable {
+    public void invoke(ExecutorService threadPool, final Method m) {
         Future<Boolean> future  = threadPool.submit(new Callable<Boolean>() {
             @Override
             public Boolean call() throws Exception {
                 _log.info(Thread.currentThread().getName());
-                f.run();
+                m.call();
                 return Boolean.TRUE;
             }
         });
@@ -56,16 +56,16 @@ public class AsyncWorker {
             future.get();
         } catch (InterruptedException e) {
             //e.printStackTrace();
-            throw e;
+            throw new RuntimeException(e);
         } catch (ExecutionException e) {
             //e.printStackTrace();
-            throw e;
+            throw new RuntimeException(e);
         }
         _log.debug("future done");
     }
 
     public static void main(String args[]) {
-        System.out.println("iiii");
+        _log.info("iiii");
         AsyncWorker helper = new AsyncWorker();
     }
 

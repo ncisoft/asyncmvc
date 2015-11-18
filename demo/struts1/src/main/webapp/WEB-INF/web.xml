@@ -4,6 +4,24 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
     <servlet>
+        <servlet-name>leeyg</servlet-name>
+        <servlet-class>com.mobiscloud.servlet.leeyg</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>leeyg</servlet-name>
+        <url-pattern>/test/leeyg</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>leeygasync</servlet-name>
+        <servlet-class>com.mobiscloud.servlet.leeygasync</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>leeygasync</servlet-name>
+        <url-pattern>/test/leeygasync</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
         <servlet-name>action</servlet-name>
         <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
         <init-param>
