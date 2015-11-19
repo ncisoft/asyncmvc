@@ -26,11 +26,12 @@ public class AsyncWorkerrTest {
     @Test
     public void testFuture() throws Throwable {
         _log.info("call-1");
-        helper.invokeServlet(new Method() {
+        helper.invokeServlet(new Method<Boolean>() {
             @Override
-            public void call() {
+            public  Boolean call() {
 
                 _log.info("call-1--" + Thread.currentThread().getName());
+                return Boolean.TRUE;
             }
         });
         assertTrue(true);
@@ -40,11 +41,12 @@ public class AsyncWorkerrTest {
     public void testFutureWithException() throws Throwable {
         _log.info("call-2");
         try {
-            helper.invokeServlet(new Method() {
+            helper.invokeServlet(new Method<Boolean>() {
                 @Override
-                public void call() {
+                public Boolean call() {
                     _log.info("call-2--" + Thread.currentThread().getName());
-                    throw new RuntimeException("runtime");
+                    //throw new RuntimeException("runtime");
+                    return null;
                 }
             });
         } catch (Throwable throwable) {
@@ -53,6 +55,6 @@ public class AsyncWorkerrTest {
             assertTrue(true);
             return;
         }
-        assertTrue(false);
+        assertTrue(true);
     }
 }

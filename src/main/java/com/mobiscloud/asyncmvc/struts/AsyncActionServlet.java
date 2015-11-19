@@ -34,11 +34,13 @@ public class AsyncActionServlet extends ActionServlet {
     @Override
     public void doPost(final HttpServletRequest request, final HttpServletResponse response) throws IOException, ServletException {
         initWorker();
-        _asyncWorker.invokeServlet(new Method() {
+        _asyncWorker.invokeServlet(new Method<Boolean>() {
             @Override
-            public void call() {
+            public Boolean call() {
                 try {
                     _process(request, response);
+                    return Boolean.TRUE;
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } catch (ServletException e) {
@@ -54,12 +56,14 @@ public class AsyncActionServlet extends ActionServlet {
         final ActionServlet _super = (ActionServlet)this;
 
 
-        _asyncWorker.invokeServlet(new Method() {
+        _asyncWorker.invokeServlet(new Method<Boolean>() {
             @Override
-            public void call() {
+            public Boolean call() {
                 try {
                     _super.doGet(request, response);
                     _process(request, response);
+                    return null;
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } catch (ServletException e) {

@@ -9,7 +9,7 @@
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="com.mobiscloud" level="info">
+        <Logger name="com.mobiscloud" level="info" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
 

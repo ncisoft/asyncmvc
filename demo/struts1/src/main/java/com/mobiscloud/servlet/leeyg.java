@@ -30,18 +30,20 @@ public class leeyg extends HttpServlet implements Serializable
 
     public void service(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-                PrintWriter out;
+        PrintWriter out;
 
-                // set content type and other response header fields first
-                res.setContentType("text/html; charset=UTF-8");
-                // then write the data of the response
-                out = res.getWriter();
+        //_log.info("invoke service()--traditional mode-begin");
 
-                out.println("<html><body>");
-                out.println("<br>" + hello());
-                out.println("</body></html>");
-                out.close();
-                _log.info("invoke service()--traditional mode");
+        // set content type and other response header fields first
+        res.setContentType("text/html; charset=UTF-8");
+        // then write the data of the response
+        out = res.getWriter();
+
+        out.println("<html><body>");
+        out.println("<br>" + hello());
+        out.println("</body></html>");
+        out.close();
+        //_log.info("invoke service()--traditional mode-end");
     }
 
     public String helloAsync() {

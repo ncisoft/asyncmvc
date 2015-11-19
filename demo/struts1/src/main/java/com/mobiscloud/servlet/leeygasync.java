@@ -29,39 +29,66 @@ public class leeygasync extends HttpServlet implements Serializable
      * Handle the HTTP GET method by building a simple web page.
      */
 
+    public String hello() {
+        return "hello, ASYNC lee李毅刚！！！";
+    }
 
     public void service(final HttpServletRequest req, final HttpServletResponse res)
             throws ServletException, IOException {
         _log.info("helper==null? " + (helper == null));
-        helper.invokeServlet(new Method() {
-            public void call() {
+        helper.invokeServlet(new Method<Boolean>() {
+            public Boolean call() throws Exception {
                 PrintWriter out;
 
-                try {
-                    // set content type and other response header fields first
-                    res.setContentType("text/html; charset=UTF-8");
-                    // then write the data of the response
-                    out = res.getWriter();
+                // set content type and other response header fields first
+                res.setContentType("text/html; charset=UTF-8");
+                // then write the data of the response
+                out = res.getWriter();
 
-                    out.println("<html><body>");
-                    out.println("<br>" + hello());
-                    out.println("</body></html>");
-                    out.close();
-                    _log.info("invoke service()");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                out.println("<html><body>");
+                out.println("<br>" + hello());
+                out.println("</body></html>");
+                out.close();
+                _log.info("invoke service()");
+                return  null;
             }
-        });
+        });//Inner<Boolean>(req, res));
     }
 
-    public String hello() {
-        return "hello, young lee李毅刚！！！ASYNC";
-    }
+    public class MethodInner<T> extends Method<T> {
+        final HttpServletRequest req;
+        final HttpServletResponse res;
 
-    public String hello() {
-        return "hello, young lee李毅刚！！！Async";
+
+        public MethodInner(HttpServletRequest req, HttpServletResponse res) {
+            this.req = req;
+            this.res = res;
+        }
+
+        public T call() throws Exception {
+            PrintWriter out;
+
+            try {
+                // set content type and other response header fields first
+                res.setContentType("text/html; charset=UTF-8");
+                // then write the data of the response
+                out = res.getWriter();
+
+                out.println("<html><body>");
+                out.println("<br>" + hello());
+                out.println("</body></html>");
+                out.close();
+                _log.info("invoke service()");
+                return  null;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+        }
+
+        }
     }
 }
+
+
+
 
 

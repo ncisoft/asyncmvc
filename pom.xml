@@ -4,7 +4,7 @@
 
     <groupId>com.mobiscloud</groupId>
     <artifactId>asyncmvc</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>asyncmvc</name>
@@ -12,6 +12,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <log4j2.version>2.4.1</log4j2.version>
     </properties>
 
     <dependencies>
@@ -41,11 +42,28 @@
             <version>18.0</version>
         </dependency>
 
+        <!-- Logging -->
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jcl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>log4j</groupId>-->
+            <!--<artifactId>log4j</artifactId>-->
+            <!--<version>1.2.17</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -72,6 +90,10 @@
                     <source>1.5</source>
                     <target>1.5</target>
                     <encoding>UTF-8</encoding>
+                    <compilerArgs>
+
+                        <arg>-Xlint:unchecked</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
         </plugins>
