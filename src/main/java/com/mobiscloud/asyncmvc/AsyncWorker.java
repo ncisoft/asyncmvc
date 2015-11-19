@@ -57,7 +57,7 @@ public class AsyncWorker {
     public void invoke(ExecutorService threadPool, final Method<Boolean> m) {
         final  int transId = countTransaction.getAndIncrement();
 
-        _log.info(getTransId(transId) +"async method call -- begin -- " + m.getElapsed() + " ms");
+        //_log.info(getTransId(transId) +"async method call -- begin -- ");
 
 
         try {
@@ -79,7 +79,7 @@ public class AsyncWorker {
             throw new RuntimeException(e);
         }
         finally {
-           _log.info(getTransId(transId)+ "async method call -- end -- " + m.getElapsed() + " ms");
+           //_log.info(getTransId(transId)+ "async method call -- end -- ");
         }
     }
 

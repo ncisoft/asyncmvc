@@ -4,17 +4,20 @@
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{ABSOLUTE} %5p %c{1}:%L - %m%n"/>
         </Console>
-        <File name="log" fileName="target/test.log" append="true">
+        <File name="MyFile" fileName="target/test.log" append="true">
             <PatternLayout pattern="%d{ABSOLUTE} %5p %c{1}:%L - %m%n"/>
         </File>
+        <Async name="Async">
+            <AppenderRef ref="MyFile"/>
+        </Async>
     </Appenders>
     <Loggers>
         <Logger name="com.mobiscloud" level="info" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
 
-        <Root level="debug">
-            <AppenderRef ref="Console"/>
+        <Root level="info">
+            <AppenderRef ref="MyFile"/>
         </Root>
     </Loggers>
 

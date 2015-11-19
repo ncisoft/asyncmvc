@@ -1,5 +1,8 @@
 package com.mobiscloud.asyncmvc;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.text.DecimalFormat;
 
 /**
@@ -8,8 +11,11 @@ import java.text.DecimalFormat;
 public class MethodContext {
     long startTime;
     private static DecimalFormat format = new DecimalFormat();
+    private static Log _log = LogFactory.getLog(MethodContext.class);
 
     public MethodContext() {
+        startTime = System.nanoTime();
+        this.getElapsed();
         startTime = System.nanoTime();
     }
 
@@ -19,7 +25,8 @@ public class MethodContext {
      */
     public String getElapsed()
     {
-        long elapsed = System.nanoTime()-startTime;;
+        long elapsed = System.nanoTime()-startTime;
+
         return format.format((elapsed/1000000d));
     }
 }

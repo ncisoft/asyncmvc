@@ -2,6 +2,7 @@ package com.mobiscloud.servlet;
 
 import com.mobiscloud.asyncmvc.AsyncWorker;
 import com.mobiscloud.asyncmvc.Method;
+import com.mobiscloud.asyncmvc.MethodContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -31,8 +32,8 @@ public class leeyg extends HttpServlet implements Serializable
     public void service(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
         PrintWriter out;
-
         //_log.info("invoke service()--traditional mode-begin");
+        MethodContext methodContext = new MethodContext();
 
         // set content type and other response header fields first
         res.setContentType("text/html; charset=UTF-8");
@@ -42,7 +43,9 @@ public class leeyg extends HttpServlet implements Serializable
         out.println("<html><body>");
         out.println("<br>" + hello());
         out.println("</body></html>");
+
         out.close();
+        //_log.info( "method call -- end -- " + methodContext.getElapsed() + " ms");
         //_log.info("invoke service()--traditional mode-end");
     }
 
