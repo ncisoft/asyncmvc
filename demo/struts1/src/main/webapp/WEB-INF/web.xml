@@ -37,7 +37,7 @@
         <servlet-class>com.mobiscloud.servlet.leeygasync</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>leeygasync</servlet-name>
+        <servlet-name>leeyg</servlet-name>
         <url-pattern>/test/async/leeyg</url-pattern>
     </servlet-mapping>
     

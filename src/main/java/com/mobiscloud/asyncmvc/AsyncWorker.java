@@ -54,7 +54,8 @@ public class AsyncWorker {
     public void invokeAction(final Method<Boolean> m) {
         invoke(_actionThreadPool, m);
     }
-    public void invoke(ExecutorService threadPool, final Method<Boolean> m) {
+
+    private void invoke(ExecutorService threadPool, final Method<Boolean> m) {
         final  int transId = countTransaction.getAndIncrement();
 
         //_log.info(getTransId(transId) +"async method call -- begin -- ");
