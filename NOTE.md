@@ -9,3 +9,5 @@
 * 但是很奇怪，通过 **TimingFilter** 的 Profile 数据，显示这种封装性能较差
 
 20151120 * System.nanoTime() * 对性能影响比较大，故删除一系列的 profile 调试信息
+
+20151120 引入了 ** ASyncFilter.java**，直接通过 Filter 完成对 servlet 的异步封装
